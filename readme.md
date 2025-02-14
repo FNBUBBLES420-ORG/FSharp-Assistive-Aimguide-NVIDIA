@@ -1,7 +1,7 @@
 # 🎯 Assistive Aim Guide (F# YOLO-Based AI)
 🚀 **A powerful, AI-driven aim assistance tool designed for accessibility, using human-like movements and real-time object tracking.**  
 ✅ **Non-locking, smooth mouse movement** for a natural feel.  
-✅ **Supports NVIDIA GPUs** for maximum performance.  
+✅ **Supports NVIDIA & AMD GPUs** for maximum performance.  
 ✅ **Detects objects in real-time** using **Ultralytics YOLO models**.  
 ✅ **Real-time FPS & latency monitoring** for performance insights.  
 ✅ **Dynamic YOLO model selection via UI** at runtime.  
@@ -13,7 +13,7 @@
 ## 🛠 **Features**
 ✔ **AI-powered object detection** (supports people, objects, etc.)  
 ✔ **Smooth, human-like aiming behavior** (non-locking, no "snap" movement)  
-✔ **Optimized for Windows 11 with NVIDIA CUDA support**  
+✔ **Optimized for Windows 11 with NVIDIA CUDA & AMD DirectML support**  
 ✔ **Real-time camera feed & auto-detection**  
 ✔ **Configurable reaction time, movement sensitivity**  
 ✔ **Supports multiple YOLO models from Ultralytics**  
@@ -99,7 +99,7 @@ Example `config.json`:
 ✔ **Fix:** Adjust `mouse_speed` and `reaction_time` in `config.json`.
 
 💡 **Issue:** Performance is slow?  
-✔ **Fix:** Ensure you have an **NVIDIA GPU** with CUDA support and check FPS monitoring.
+✔ **Fix:** Ensure you have an **NVIDIA or AMD GPU** with CUDA/DirectML support and check FPS monitoring.
 
 💡 **Issue:** Running on Linux or macOS?  
 ✔ **Fix:** This tool is **Windows 11-only** due to dependencies on DirectX and WindowsInput.
