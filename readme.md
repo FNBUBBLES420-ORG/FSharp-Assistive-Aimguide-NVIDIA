@@ -5,7 +5,7 @@
 ✅ **Detects objects in real-time** using **Ultralytics YOLO models**.  
 ✅ **Real-time FPS & latency monitoring** for performance insights.  
 ✅ **Dynamic YOLO model selection via UI** at runtime.  
-✅ **Windows-only support** (requires DirectX and Windows-specific libraries).  
+✅ **Windows 11 compatibility** (requires DirectX and Windows-specific libraries).  
 ✅ **Supports only ONNX models (`.onnx`)** for AI inference.  
 
 ---
@@ -13,23 +13,25 @@
 ## 🛠 **Features**
 ✔ **AI-powered object detection** (supports people, objects, etc.)  
 ✔ **Smooth, human-like aiming behavior** (non-locking, no "snap" movement)  
-✔ **Optimized for Windows with NVIDIA CUDA support**  
+✔ **Optimized for Windows 11 with NVIDIA CUDA support**  
 ✔ **Real-time camera feed & auto-detection**  
 ✔ **Configurable reaction time, movement sensitivity**  
 ✔ **Supports multiple YOLO models from Ultralytics**  
 ✔ **Real-time FPS & latency tracking** displayed in the console  
 ✔ **Interactive UI for selecting YOLO models**  
-✔ **Windows-only compatibility** (uses WindowsInput, DirectX, and SharpDX for screen capture).  
+✔ **Windows 11-only compatibility** (uses WindowsInput, DirectX, and SharpDX for screen capture).  
 ✔ **ONNX-only AI model support** (TensorRT `.engine` models are not supported).  
 
 ---
 
 ## 📥 **Installation**
 ### **Step 1: Install Dependencies**
+Ensure you have the **.NET SDK** installed:  
+👉 [Download .NET SDK](https://dotnet.microsoft.com/en-us/download)  
+
 Run the following command to install required packages:
 ```sh
-./setup_dependencies.sh  # (Linux/macOS - Not supported yet)
-setup_dependencies.bat   # (Windows)
+setup_dependencies.bat  # (Windows 11)
 ```
 Or manually install dependencies:
 ```sh
@@ -98,7 +100,7 @@ Example `config.json`:
 ✔ **Fix:** Ensure you have an **NVIDIA GPU** with CUDA support and check FPS monitoring.
 
 💡 **Issue:** Running on Linux or macOS?  
-✔ **Fix:** This tool is **Windows-only** due to dependencies on DirectX and WindowsInput.
+✔ **Fix:** This tool is **Windows 11-only** due to dependencies on DirectX and WindowsInput.
 
 💡 **Issue:** TensorRT `.engine` models are not working?  
 ✔ **Fix:** This project **only supports ONNX (`.onnx`) models** for AI inference.  
@@ -110,6 +112,5 @@ This project is `Private License`.
 
 📧 **Need help?** Contact us on Discord or open an issue!
 ### [Invite Link](https://discord.fnbubbles420.org/invite)
-
 
 ## 🚀 Happy Gaming! 🎮
