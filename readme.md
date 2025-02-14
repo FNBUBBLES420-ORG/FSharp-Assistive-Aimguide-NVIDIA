@@ -44,6 +44,7 @@ dotnet add package WindowsInput
 dotnet add package ManagedCuda
 dotnet add package Microsoft.ML.OnnxRuntime.DirectML
 dotnet add package DirectML.NET
+dotnet add package System.IO.Ports
 ```
 
 ### **Step 2: Build the Project**
