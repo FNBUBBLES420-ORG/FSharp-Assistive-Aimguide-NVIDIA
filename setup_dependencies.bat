@@ -10,7 +10,8 @@ echo ===============================
 dotnet --version 2> dotnet_version.log
 if %errorlevel% neq 0 (
     echo ❌ .NET SDK is not installed. Please install .NET SDK from:
-    echo    https://dotnet.microsoft.com/en-us/download
+    echo ✅ .NET 8.0 Long Term Support
+    echo 👉 https://dotnet.microsoft.com/en-us/download
     if not "%CI%"=="true" pause
     exit /b 1
 )
