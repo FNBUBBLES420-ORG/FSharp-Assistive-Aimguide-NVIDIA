@@ -1,15 +1,53 @@
 module GPUProcessing
 
-open ManagedCuda
-open ManagedCuda.VectorTypes
+open System
+open System.Linq
+open Microsoft.ML.OnnxRuntime
+open Microsoft.ML.OnnxRuntime.Tensors
+open ManagedCuda  // NVIDIA CUDA
+open ManagedCuda.BasicTypes
+open DirectML.NET // AMD DirectML
 
-let device = new CudaContext()
+/// Detect if an NVIDIA GPU is available
+let hasNvidiaGpu () =
+    try
+        CudaContext.GetDeviceCount() > 0
+    with
+    | :? CudaException -> false
+    | _ -> false
 
-let toCudaTensor (tensor: float32[]) =
-    let gpuMem = new CudaDeviceVariable<float32>(tensor.Length)
-    gpuMem.CopyToDevice(tensor)
-    gpuMem
+/// Detect if an AMD GPU is available
+let hasAmdGpu () =
+    try
+        let devices = DirectML.Device.GetAvailableAdapters()
+        devices.Length > 0
+    with
+    | _ -> false
 
-let runWithCuda (data: float32[]) =
-    let gpuData = toCudaTensor data
-    printfn "Processed data on GPU!"
+/// Detect and return the available GPU type
+let detectGpuType () =
+    if hasNvidiaGpu() then
+        "NVIDIA"
+    elif hasAmdGpu() then
+        "AMD"
+    else
+        "CPU"
+
+/// Process tensor data on GPU based on detected hardware
+let processOnGpu (data: float32[]) =
+    match detectGpuType() with
+    | "NVIDIA" ->
+        printfn "✅ Using NVIDIA CUDA for processing."
+        let gpuMem = new CudaDeviceVariable<float32>(data.Length)
+        gpuMem.CopyToDevice(data)
+        gpuMem
+    | "AMD" ->
+        printfn "✅ Using AMD DirectML for processing."
+        use session = new InferenceSession("yolov8s.onnx", SessionOptions())
+        let tensor = new DenseTensor<float32>(data, [|data.Length|])
+        let input = NamedOnnxValue.CreateFromTensor("input", tensor)
+        use results = session.Run([|input|])
+        results.First().AsTensor<float32>()
+    | "CPU" ->
+        printfn "⚠️ No compatible GPU found! Using CPU instead."
+        data // Just return the original data if CPU fallback
