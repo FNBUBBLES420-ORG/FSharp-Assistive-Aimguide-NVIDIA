@@ -3,6 +3,7 @@ module AssistiveAimGuide
 open System
 open System.Diagnostics
 open System.Threading.Tasks
+open RJCP.IO.Ports
 open WindowsInput
 open ScreenCapture
 open YOLOInference
@@ -12,6 +13,14 @@ let simulator = new InputSimulator()
 let rand = Random()
 let mutable frameCount = 0
 let mutable lastTime = Stopwatch.StartNew()
+
+// Serial Communication Setup for Arduino Leonardo
+let port = new SerialPortStream("COM3", 9600)  // Replace COM3 with your actual port
+try
+    port.Open()
+    printfn "✅ Connected to Arduino Leonardo!"
+with
+| ex -> printfn "❌ Error opening serial port: %s" ex.Message
 
 let rec mainLoop () =
     task {
@@ -31,8 +40,16 @@ let rec mainLoop () =
             let jitterX = rand.Next(-5, 5)
             let jitterY = rand.Next(-5, 5)
 
-            aimAtTarget (moveX + jitterX) (moveY + jitterY)
-
+        // Process Serial Input from Arduino Leonardo
+        if port.IsOpen && port.BytesToRead > 0 then
+            let data = port.ReadLine().Trim()
+            printfn "📡 Received from Arduino: %s" data
+            match data with
+            | "ENABLE_AIM" -> printfn "🎯 Assistive Aim Enabled"
+            | "DISABLE_AIM" -> printfn "🛑 Assistive Aim Disabled"
+            | "RESET" -> printfn "🔄 Resetting Aim Assist"
+            | _ -> printfn "⚠️ Unknown command: %s" data
+        
         frameCount <- frameCount + 1
         let elapsedTime = startTime.ElapsedMilliseconds
 
@@ -52,3 +69,9 @@ let main argv =
         mainLoop () |> Async.StartAsTask |> ignore
     | None -> printfn "No monitor selected."
     0
+
+// Ensure Serial Port is properly closed on exit
+System.AppDomain.CurrentDomain.ProcessExit.Add(fun _ ->
+    if port.IsOpen then port.Close()
+    printfn "🔌 Serial Port Closed"
+)
