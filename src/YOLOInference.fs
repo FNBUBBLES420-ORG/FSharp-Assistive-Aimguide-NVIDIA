@@ -6,7 +6,9 @@ open Microsoft.ML.OnnxRuntime
 open Microsoft.ML.OnnxRuntime.Tensors
 open Newtonsoft.Json
 open System.Threading.Tasks
+open GPUProcessing
 
+// Define configuration type
 type Config = { model_path: string }
 let configFile = "config.json"
 
@@ -19,8 +21,15 @@ let config =
 
 printfn "Loading YOLO model: %s" config.model_path
 
+// Select execution provider based on available GPU
+type GpuType = | NVIDIA | AMD | CPU
+let selectedGpu = detectGpuType()
+
 let options = SessionOptions()
-options.AppendExecutionProvider_CUDA(0)  // Enable GPU Execution
+match selectedGpu with
+| "NVIDIA" -> options.AppendExecutionProvider_CUDA(0)
+| "AMD" -> options.AppendExecutionProvider_DML()
+| _ -> printfn "⚠️ No compatible GPU found! Running on CPU."
 
 let session = new InferenceSession(config.model_path, options)
 
