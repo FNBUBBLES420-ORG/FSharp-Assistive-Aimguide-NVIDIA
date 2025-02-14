@@ -28,7 +28,7 @@
 
 ## 📥 **Installation**
 ### **Step 1: Install Dependencies**
-Ensure you have the **.NET SDK** installed:  
+Ensure you have the **.NET SDK** installed:  `.NET 8.0 Long Term Support` ONLY
 👉 [Download .NET SDK](https://dotnet.microsoft.com/en-us/download)  
 
 Run the following command to install required packages:
