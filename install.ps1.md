@@ -1,3 +1,9 @@
-- 1️⃣ Save this script as install.ps1
-- 2️⃣ Right-click → Run with PowerShell (as Administrator)
-- 3️⃣ Follow the on-screen instructions
+### 🔍 Next Steps
+- Run the script manually on your system:
+- Open PowerShell as Administrator.
+- Navigate to the directory where the script is located. Run:
+
+```
+Set-ExecutionPolicy Bypass -Scope Process -Force
+.\install.ps1
+```
