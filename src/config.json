@@ -1,5 +1,5 @@
 {
-  "model_path": "yolov8s.onnx",
+  "model_path": "YOLO11n.onnx",
   "mouse_speed": 1.5,
   "reaction_time": 50,
   "detection_threshold": 0.4,
