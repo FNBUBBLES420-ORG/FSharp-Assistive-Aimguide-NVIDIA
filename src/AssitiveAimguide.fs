@@ -16,7 +16,7 @@ let mutable lastTime = Stopwatch.StartNew()
 
 // Display Help Message
 let showHelpMessage () =
-    printfn "📧 Need help? Contact us on Discord or open an issue!"
+    printfn "📧 Need help? Join FNBubbles420 Org Community Discord Server"
     printfn "🔗 Invite Link: https://discord.fnbubbles420.org/invite"
     printfn "📌 Go To Assistive AimGuide Channel and ping @Bubbles The Dev"
     printfn "=========================================================="
