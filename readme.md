@@ -106,8 +106,10 @@ Example `config.json`:
 ---
 
 ## 📝 **License**
-This project is open-source and available under the **MIT License**.
+This project is `Private License`.
 
 📧 **Need help?** Contact us on Discord or open an issue!
+### [Invite Link](https://discord.fnbubbles420.org/invite)
 
-🚀 Happy Gaming! 🎮
+
+## 🚀 Happy Gaming! 🎮
