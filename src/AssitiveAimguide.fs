@@ -1,4 +1,4 @@
-module Main
+module AssistiveAimGuide
 
 open System
 open System.Diagnostics
