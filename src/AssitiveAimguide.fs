@@ -25,7 +25,7 @@ let showHelpMessage () =
 showHelpMessage ()
 
 // Serial Communication Setup for Arduino Leonardo
-let port = new SerialPortStream("COM3", 9600)  // Replace COM3 with your actual port
+let port = new SerialPortStream("COM3", 115200)  // Replace COM3 with your actual port
 try
     port.Open()
     printfn "✅ Connected to Arduino Leonardo!"
