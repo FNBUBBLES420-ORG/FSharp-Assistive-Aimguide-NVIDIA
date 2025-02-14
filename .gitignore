@@ -84,3 +84,6 @@ SharpDX.log
 # Ignore DirectX Shader cache
 *.cso
 *.hlsl
+
+# Ignore MD files
+*.md
