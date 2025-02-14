@@ -8,11 +8,13 @@ Below are the versions currently supported with security updates:
 |---------------------------------------|------------------|
 | **Microsoft.ML.OnnxRuntime**          | 1.20.1          |
 | **Microsoft.ML.OnnxRuntime.Gpu**      | 1.20.1          |
+| **Microsoft.ML.OnnxRuntime.DirectML** | 1.20.1          |
 | **TorchSharp**                        | 0.100.5         |
 | **MathNet.Numerics**                  | 5.0.0           |
 | **Emgu.CV**                           | 4.5.5           |
 | **WindowsInput**                      | 1.3.0           |
 | **ManagedCuda**                       | 11.7.0          |
+| **DirectML.NET**                      | 1.9.0           |
 
 ## Reporting a Vulnerability
 
