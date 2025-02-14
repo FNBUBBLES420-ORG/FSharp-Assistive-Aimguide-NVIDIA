@@ -1,0 +1,113 @@
+# 🎯 Assistive Aim Guide (F# YOLO-Based AI)
+🚀 **A powerful, AI-driven aim assistance tool designed for accessibility, using human-like movements and real-time object tracking.**  
+✅ **Non-locking, smooth mouse movement** for a natural feel.  
+✅ **Supports NVIDIA GPUs** for maximum performance.  
+✅ **Detects objects in real-time** using **Ultralytics YOLO models**.  
+✅ **Real-time FPS & latency monitoring** for performance insights.  
+✅ **Dynamic YOLO model selection via UI** at runtime.  
+✅ **Windows-only support** (requires DirectX and Windows-specific libraries).  
+✅ **Supports only ONNX models (`.onnx`)** for AI inference.  
+
+---
+
+## 🛠 **Features**
+✔ **AI-powered object detection** (supports people, objects, etc.)  
+✔ **Smooth, human-like aiming behavior** (non-locking, no "snap" movement)  
+✔ **Optimized for Windows with NVIDIA CUDA support**  
+✔ **Real-time camera feed & auto-detection**  
+✔ **Configurable reaction time, movement sensitivity**  
+✔ **Supports multiple YOLO models from Ultralytics**  
+✔ **Real-time FPS & latency tracking** displayed in the console  
+✔ **Interactive UI for selecting YOLO models**  
+✔ **Windows-only compatibility** (uses WindowsInput, DirectX, and SharpDX for screen capture).  
+✔ **ONNX-only AI model support** (TensorRT `.engine` models are not supported).  
+
+---
+
+## 📥 **Installation**
+### **Step 1: Install Dependencies**
+Run the following command to install required packages:
+```sh
+./setup_dependencies.sh  # (Linux/macOS - Not supported yet)
+setup_dependencies.bat   # (Windows)
+```
+Or manually install dependencies:
+```sh
+dotnet add package Microsoft.ML.OnnxRuntime
+dotnet add package Microsoft.ML.OnnxRuntime.Gpu
+dotnet add package TorchSharp
+dotnet add package MathNet.Numerics
+dotnet add package Emgu.CV
+dotnet add package WindowsInput
+dotnet add package ManagedCuda
+```
+
+### **Step 2: Build the Project**
+```sh
+dotnet build
+```
+
+### **Step 3: Run the Assistive Aim Guide**
+```sh
+dotnet run
+```
+Upon launch, a UI will prompt you to select a YOLO model before the tracking system starts.
+
+---
+
+## 🎮 **How It Works**
+1️⃣ **Select the YOLO model** using the UI at launch.  
+2️⃣ **Select your game window** (or use the primary monitor for capture).  
+3️⃣ **The AI detects objects in real-time** and calculates movement.  
+4️⃣ **The mouse moves naturally** toward detected objects (no snap locks).  
+5️⃣ **Monitor FPS & latency** updates in the console for performance insights.  
+6️⃣ **Exit the tool anytime** by pressing the configured key.  
+
+---
+
+## ⚙️ **Configuration**
+You can edit `config.json` to tweak settings like:
+- **Model file** (`model_path`)
+- **Sensitivity** (`mouse_speed`)
+- **Reaction delay** (`reaction_time`)
+- **Detection confidence** (`detection_threshold`)
+- **Enabled features** (`visuals`, `debug_mode`)
+
+Example `config.json`:
+```json
+{
+  "model_path": "yolov8s.onnx",
+  "mouse_speed": 1.5,
+  "reaction_time": 50,
+  "detection_threshold": 0.4,
+  "visuals": true,
+  "debug_mode": false
+}
+```
+
+---
+
+## 🔧 **Troubleshooting**
+💡 **Issue:** Tool not detecting objects?  
+✔ **Fix:** Ensure your camera or screen capture is working and properly positioned.
+
+💡 **Issue:** Mouse movements feel robotic?  
+✔ **Fix:** Adjust `mouse_speed` and `reaction_time` in `config.json`.
+
+💡 **Issue:** Performance is slow?  
+✔ **Fix:** Ensure you have an **NVIDIA GPU** with CUDA support and check FPS monitoring.
+
+💡 **Issue:** Running on Linux or macOS?  
+✔ **Fix:** This tool is **Windows-only** due to dependencies on DirectX and WindowsInput.
+
+💡 **Issue:** TensorRT `.engine` models are not working?  
+✔ **Fix:** This project **only supports ONNX (`.onnx`) models** for AI inference.  
+
+---
+
+## 📝 **License**
+This project is open-source and available under the **MIT License**.
+
+📧 **Need help?** Contact us on Discord or open an issue!
+
+🚀 Happy Gaming! 🎮
