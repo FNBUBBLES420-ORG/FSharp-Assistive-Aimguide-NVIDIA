@@ -1,0 +1,3 @@
+- 1️⃣ Save this script as install.ps1
+- 2️⃣ Right-click → Run with PowerShell (as Administrator)
+- 3️⃣ Follow the on-screen instructions
