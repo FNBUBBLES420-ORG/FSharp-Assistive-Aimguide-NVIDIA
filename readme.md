@@ -42,6 +42,8 @@ dotnet add package MathNet.Numerics
 dotnet add package Emgu.CV
 dotnet add package WindowsInput
 dotnet add package ManagedCuda
+dotnet add package Microsoft.ML.OnnxRuntime.DirectML
+dotnet add package DirectML.NET
 ```
 
 ### **Step 2: Build the Project**
