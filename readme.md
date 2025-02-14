@@ -49,11 +49,11 @@ dotnet add package DirectML.NET
 dotnet add package System.IO.Ports
 ```
 Alternatively, you can use the PowerShell script:
+- Run In `Admin Mode`
 ```sh
 Set-ExecutionPolicy Bypass -Scope Process -Force
-.\install.ps1
+.\install.ps1  <---   copy command     # (Windows 11)
 ```
-  ### - Windows 11 only
 
 ### **Step 2: Build and Run the Project**
 Once you have installed the dependencies, follow these steps:
