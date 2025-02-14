@@ -14,6 +14,16 @@ let rand = Random()
 let mutable frameCount = 0
 let mutable lastTime = Stopwatch.StartNew()
 
+// Display Help Message
+let showHelpMessage () =
+    printfn "📧 Need help? Contact us on Discord or open an issue!"
+    printfn "🔗 Invite Link: https://discord.fnbubbles420.org/invite"
+    printfn "📌 Go To Assistive AimGuide Channel and ping @Bubbles The Dev"
+    printfn "=========================================================="
+
+// Show help message at startup
+showHelpMessage ()
+
 // Serial Communication Setup for Arduino Leonardo
 let port = new SerialPortStream("COM3", 9600)  // Replace COM3 with your actual port
 try
@@ -48,6 +58,7 @@ let rec mainLoop () =
             | "ENABLE_AIM" -> printfn "🎯 Assistive Aim Enabled"
             | "DISABLE_AIM" -> printfn "🛑 Assistive Aim Disabled"
             | "RESET" -> printfn "🔄 Resetting Aim Assist"
+            | "HELP" -> showHelpMessage()  // Users can request help via serial input
             | _ -> printfn "⚠️ Unknown command: %s" data
         
         frameCount <- frameCount + 1
