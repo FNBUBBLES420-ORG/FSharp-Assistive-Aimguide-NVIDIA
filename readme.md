@@ -7,6 +7,7 @@
 ✅ **Dynamic YOLO model selection via UI** at runtime.  
 ✅ **Windows 11 compatibility** (requires DirectX and Windows-specific libraries).  
 ✅ **Supports only ONNX models (`.onnx`)** for AI inference.  
+✅ **Supports Arduino Leonardo for serial input-based control.**  
 
 ---
 
@@ -21,6 +22,7 @@
 ✔ **Interactive UI for selecting YOLO models**  
 ✔ **Windows 11-only compatibility** (uses WindowsInput, DirectX, and SharpDX for screen capture).  
 ✔ **ONNX-only AI model support** (TensorRT `.engine` models are not supported).  
+✔ **Arduino Leonardo support for reading serial input.**  
 
 ---
 
@@ -46,16 +48,31 @@ dotnet add package Microsoft.ML.OnnxRuntime.DirectML
 dotnet add package DirectML.NET
 dotnet add package System.IO.Ports
 ```
+Alternatively, you can use the PowerShell script:
+```sh
+Set-ExecutionPolicy Bypass -Scope Process -Force
+.\install.ps1
+```
+  ### - Windows 11 only
 
-### **Step 2: Build the Project**
+### **Step 2: Build and Run the Project**
+Once you have installed the dependencies, follow these steps:
+
+1️⃣ **Restore dependencies** to ensure all required packages are available:
+```sh
+dotnet restore
+```
+
+2️⃣ **Compile the project** to generate the executable:
 ```sh
 dotnet build
 ```
 
-### **Step 3: Run the Assistive Aim Guide**
+3️⃣ **Launch the Assistive Aim Guide**:
 ```sh
 dotnet run
 ```
+
 Upon launch, a UI will prompt you to select a YOLO model before the tracking system starts.
 
 ---
@@ -108,6 +125,9 @@ Example `config.json`:
 💡 **Issue:** TensorRT `.engine` models are not working?  
 ✔ **Fix:** This project **only supports ONNX (`.onnx`) models** for AI inference.  
 
+💡 **Issue:** Arduino Leonardo is not recognized?  
+✔ **Fix:** Ensure the correct COM port is set, and drivers are properly installed.
+
 ---
 
 ## 📝 **License**
@@ -115,5 +135,16 @@ This project is `Private License`.
 
 📧 **Need help?** Contact us on Discord or open an issue!
 ### [Invite Link](https://discord.fnbubbles420.org/invite)
+- Go To `Assistive AimGuide` Channel.
 
 ## 🚀 Happy Gaming! 🎮
+
+### 📌 install.ps1
+- Run the script manually on your system:
+- Open PowerShell as Administrator.
+- Navigate to the directory where the script is located. Run:
+
+```
+Set-ExecutionPolicy Bypass -Scope Process -Force
+.\install.ps1
+```
