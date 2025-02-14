@@ -48,11 +48,15 @@ dotnet add package Microsoft.ML.OnnxRuntime.DirectML
 dotnet add package DirectML.NET
 dotnet add package System.IO.Ports
 ```
-Alternatively, you can use the PowerShell script:
-- Run In `Admin Mode`
-```sh
+
+### 📌 install.ps1
+- Run the script manually on your system:
+- Open PowerShell as `Administrator`.
+- Navigate to the directory where the script is located. Run:
+
+```
 Set-ExecutionPolicy Bypass -Scope Process -Force
-.\install.ps1  <---   copy command     # (Windows 11)
+.\install.ps1    <---- Copy Command # Windows 11 Only
 ```
 
 ### **Step 2: Build and Run the Project**
@@ -138,13 +142,3 @@ This project is `Private License`.
 - Go To `Assistive AimGuide` Channel.
 
 ## 🚀 Happy Gaming! 🎮
-
-### 📌 install.ps1
-- Run the script manually on your system:
-- Open PowerShell as Administrator.
-- Navigate to the directory where the script is located. Run:
-
-```
-Set-ExecutionPolicy Bypass -Scope Process -Force
-.\install.ps1
-```
