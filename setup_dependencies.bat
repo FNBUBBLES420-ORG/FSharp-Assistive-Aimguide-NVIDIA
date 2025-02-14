@@ -18,7 +18,7 @@ if %errorlevel% neq 0 (
 setlocal enabledelayedexpansion
 
 :: Define the list of packages
-set "packages=Microsoft.ML.OnnxRuntime Microsoft.ML.OnnxRuntime.Gpu Microsoft.ML.OnnxRuntime.DirectML TorchSharp MathNet.Numerics Emgu.CV WindowsInput ManagedCuda DirectML.NET"
+set "packages=Microsoft.ML.OnnxRuntime Microsoft.ML.OnnxRuntime.Gpu Microsoft.ML.OnnxRuntime.DirectML TorchSharp MathNet.Numerics Emgu.CV WindowsInput ManagedCuda DirectML.NETSystem.IO.Ports"
 
 :: Create a log file for tracking failed installations
 set "logfile=install_log.txt"
