@@ -87,3 +87,9 @@ SharpDX.log
 
 # Ignore MD files
 *.md
+
+# Ignore .fsproj.md
+*.fsproj.md
+
+# Ignore .fsproj
+*.fsproj
