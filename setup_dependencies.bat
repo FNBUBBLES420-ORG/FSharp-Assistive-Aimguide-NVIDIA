@@ -15,10 +15,12 @@ if %errorlevel% neq 0 (
     echo 👉 Follow The Directions When Installing Dotnet Program.
     echo 👉 Once the dotnet is successfully installed Read Below:
     echo ===============================
-    echo 🎉 Close Terminal - Press Enter & CD the src folder for the dotnet packages Install Them Manual copy all dotnet packages and paste them in a NEW CMD.exe
+    echo 🎉 Close Terminal - Press Enter &
+    echo 👉 CD the src folder for the dotnet packages Install Them Manual copy all dotnet packages and paste them in a NEW CMD.exe
     echo 👉 press start, type in search bar CMD.exe press enter then paste then dotnet packages in terminal all at once,
     echo 👉 press enter they will install then the last one you will have to press enter to install that one. ENJOY!!
     echo ===============================
     if not "%CI%"=="true" pause
     exit /b 1
 )
+pause
