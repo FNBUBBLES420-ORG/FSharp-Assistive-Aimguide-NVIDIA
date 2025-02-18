@@ -24,7 +24,7 @@
 - **Live FPS & latency tracking** displayed in the console.
 - **Interactive UI for selecting YOLO models** at startup.
 - **ONNX-only AI model support** (TensorRT `.engine` models are not supported).
-- **Arduino Leonardo integration** for real-time serial control.
+- **Arduino Leonardo integration** for real-time serial control. ` Recommended `
 
 ---
 
