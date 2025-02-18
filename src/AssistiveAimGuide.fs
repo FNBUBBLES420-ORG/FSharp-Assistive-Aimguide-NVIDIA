@@ -64,19 +64,22 @@ let showHelpMessage () =
     printfn "=========================================================="
 
 // ✅ Serial Communication Setup for Arduino Leonardo
+// Serial Communication Setup for Arduino Leonardo
 let mutable port =
     try
         let serialPort = new SerialPortStream("COM3", 115200)
         serialPort.Open()
-        printfn "✅ Connected to Arduino Leonardo on COM3"
+        if not serialPort.IsOpen then
+            failwith "😱 Arduino Leonardo not detected! Please connect an Arduino Leonardo and try again. 🚫"
+        printfn "✅✅ Connected to Arduino Leonardo on COM3! 🔌🤖"
         serialPort
     with ex ->
-        printfn "❌ Error opening serial port: %s" ex.Message
-        null
+        failwithf "❌ Error opening serial port: %s. Arduino Leonardo is required to run this application. 😢" ex.Message
 
+// Ensure proper disposal on process exit
 AppDomain.CurrentDomain.ProcessExit.Add(fun _ ->
     if port <> null && port.IsOpen then
-        printfn "🔌 Closing serial port..."
+        printfn "🔌🚪 Closing serial port... See you later, Arduino! 👋"
         port.Dispose()
 )
 
