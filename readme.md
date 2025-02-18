@@ -9,7 +9,7 @@
 - **Dynamic YOLO model selection via UI** at runtime.
 - **Windows 11 compatibility** (requires DirectX and Windows-specific libraries).
 - **Supports ONNX models (`.onnx`)** for AI inference.
-- **Arduino Leonardo support** for serial input-based control.
+- **Arduino Leonardo support** for serial input-based control. **`Recommended`**
 
 ---
 
@@ -24,7 +24,7 @@
 - **Live FPS & latency tracking** displayed in the console.
 - **Interactive UI for selecting YOLO models** at startup.
 - **ONNX-only AI model support** (TensorRT `.engine` models are not supported).
-- **Arduino Leonardo integration** for real-time serial control. ` Recommended `
+- **Arduino Leonardo integration** for real-time serial control. 
 
 ---
 
