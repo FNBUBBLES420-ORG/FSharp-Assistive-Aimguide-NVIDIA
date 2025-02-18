@@ -19,7 +19,19 @@ if %errorlevel% neq 0 (
 setlocal enabledelayedexpansion
 
 :: Define the list of packages
-set "packages=Microsoft.ML.OnnxRuntime Microsoft.ML.OnnxRuntime.Gpu Microsoft.ML.OnnxRuntime.DirectML TorchSharp MathNet.Numerics Emgu.CV WindowsInput ManagedCuda DirectML.NETSystem.IO.Ports"
+set "packages=Microsoft.ML.OnnxRuntime --version 1.20.1
+Microsoft.ML.OnnxRuntime.Gpu --version 1.20.1
+TorchSharp --version 0.101.0
+MathNet.Numerics --version 5.0.0
+Emgu.CV --version 4.6.0.5131
+ManagedCuda --version 10.0.0
+System.IO.Ports --version 7.0.0
+InputSimulatorStandard --version 1.0.0
+RJCP.SerialPortStream --version 3.0.1
+SharpDX --version 4.2.0
+SharpDX.Direct3D11 --version 4.2.0
+SharpDX.DXGI --version 4.2.0
+Newtonsoft.Json --version 13.0.3"
 
 :: Create a log file for tracking failed installations
 set "logfile=install_log.txt"
@@ -28,10 +40,10 @@ echo Install Log - %DATE% %TIME% > "%logfile%"
 
 for %%p in (%packages%) do (
     echo Installing: %%p...
-    dotnet add package %%p > "%logfile%" 2>&1
+    dotnet add package %%p >> "%logfile%" 2>&1
     if %errorlevel% neq 0 (
         echo ❌ Failed to install: %%p (Check install_log.txt for details)
-        pause
+        if not "%CI%"=="true" pause
         exit /b 1
     )
     echo ✅ Successfully installed: %%p
@@ -41,4 +53,4 @@ for %%p in (%packages%) do (
 echo ===============================
 echo  🎉 All dependencies installed successfully!
 echo ===============================
-pause
+if not "%CI%"=="true" pause
