@@ -2,87 +2,154 @@ module AssistiveAimGuide
 
 open System
 open System.Diagnostics
+open System.Threading
 open System.Threading.Tasks
 open RJCP.IO.Ports
-open WindowsInput
+open InputSimulatorStandard
 open ScreenCapture
+
+// Define the captureScreenAsync function
+let captureScreenAsync () : Task<byte[]> =
+    Task.Run(fun () ->
+        // Simulate screen capture logic
+        let screenData = Array.zeroCreate<byte> 1024 // Example byte array
+        screenData
+    )
 open YOLOInference
+
+// Define the runInferenceAsync function
+let runInferenceAsync (imageData: byte[]) : Async<float[]> =
+    async {
+        // Simulate inference logic
+        let detected = [| 0.5; 0.5 |] // Example detection result
+        return detected
+    }
 open InputControl
 
+// Define the gameSelection function
+let gameSelection () =
+    let knownGames = ["GameA"; "GameB"; "GameC"] // List of known game process names
+    let runningGames =
+        Process.GetProcesses()
+        |> Array.filter (fun p -> knownGames |> List.contains p.ProcessName)
+        |> Array.map (fun p -> p.ProcessName)
+    
+    if runningGames.Length > 0 then
+        printfn "Please select a game:"
+        runningGames |> Array.iteri (fun i game -> printfn "%d. %s" (i + 1) game)
+        match Console.ReadKey(true).Key with
+        | key when key >= ConsoleKey.D1 && key <= ConsoleKey.D9 ->
+            let index = int key - int ConsoleKey.D1
+            if index < runningGames.Length then
+                Some runningGames.[index]
+            else
+                None
+        | _ -> None
+    else
+        printfn "No known games are currently running."
+        None
+
+// Initialize global variables
 let simulator = new InputSimulator()
 let rand = Random()
 let mutable frameCount = 0
 let mutable lastTime = Stopwatch.StartNew()
+let cts = new CancellationTokenSource() // For stopping async loops
 
-// Display Help Message
+// 🆘 Display Help Message
 let showHelpMessage () =
     printfn "📧 Need help? Join FNBubbles420 Org Community Discord Server"
     printfn "🔗 Invite Link: https://discord.fnbubbles420.org/invite"
     printfn "📌 Go To Assistive AimGuide Channel and ping @Bubbles The Dev"
     printfn "=========================================================="
 
-// Show help message at startup
-showHelpMessage ()
+// ✅ Serial Communication Setup for Arduino Leonardo
+let mutable port =
+    try
+        let serialPort = new SerialPortStream("COM3", 115200)
+        serialPort.Open()
+        printfn "✅ Connected to Arduino Leonardo on COM3"
+        serialPort
+    with ex ->
+        printfn "❌ Error opening serial port: %s" ex.Message
+        null
 
-// Serial Communication Setup for Arduino Leonardo
-let port = new SerialPortStream("COM3", 115200)  // Replace COM3 with your actual port
-try
-    port.Open()
-    printfn "✅ Connected to Arduino Leonardo!"
-with
-| ex -> printfn "❌ Error opening serial port: %s" ex.Message
+AppDomain.CurrentDomain.ProcessExit.Add(fun _ ->
+    if port <> null && port.IsOpen then
+        printfn "🔌 Closing serial port..."
+        port.Dispose()
+)
 
-let rec mainLoop () =
-    task {
-        let startTime = Stopwatch.StartNew()
+// 🎯 Main Processing Loop
+let rec mainLoop (ct: CancellationToken) =
+    async {
+        while not ct.IsCancellationRequested do
+            try
+                let startTime = Stopwatch.StartNew()
 
-        let! frame = captureScreenAsync ()
-        let imageData = frame.ToByteArray()  // Convert DXGI frame to byte array
-        let! results = runInferenceAsync imageData
-        let detected = results |> List.head
+                // Capture screen & run YOLO model
+                let! frameTask = captureScreenAsync () |> Async.AwaitTask
+                let imageData = frameTask
+                let results = runInferenceAsync imageData |> Async.RunSynchronously
 
-        if detected.Length > 0 then
-            let xMid = detected.[0]
-            let yMid = detected.[1]
-            let moveX = int (xMid - 960.0)  // Assuming 1920x1080 resolution
-            let moveY = int (yMid - 540.0)
+                // Handle detection results
+                match results with
+                | detected when detected.Length > 0 ->
+                    let xMid = detected.[0]
+                    let yMid = detected.[1]
+                    printfn "🎯 Detected target at: X = %.2f, Y = %.2f" xMid yMid
+                    simulator.Mouse.MoveMouseBy(int xMid, int yMid) |> ignore
+                | _ -> printfn "🚫 No targets detected."
 
-            let jitterX = rand.Next(-5, 5)
-            let jitterY = rand.Next(-5, 5)
+                // Handle Serial Input from Arduino
+                if port <> null && port.IsOpen && port.BytesToRead > 0 then
+                    let data = port.ReadLine().Trim()
+                    printfn "📡 Received from Arduino: %s" data
+                    match data with
+                    | "ENABLE_AIM" -> printfn "🎯 Assistive Aim Enabled"
+                    | "DISABLE_AIM" -> printfn "🛑 Assistive Aim Disabled"
+                    | "RESET" -> printfn "🔄 Resetting Aim Assist"
+                    | "HELP" -> showHelpMessage()
+                    | _ -> printfn "⚠️ Unknown command: %s" data
 
-        // Process Serial Input from Arduino Leonardo
-        if port.IsOpen && port.BytesToRead > 0 then
-            let data = port.ReadLine().Trim()
-            printfn "📡 Received from Arduino: %s" data
-            match data with
-            | "ENABLE_AIM" -> printfn "🎯 Assistive Aim Enabled"
-            | "DISABLE_AIM" -> printfn "🛑 Assistive Aim Disabled"
-            | "RESET" -> printfn "🔄 Resetting Aim Assist"
-            | "HELP" -> showHelpMessage()  // Users can request help via serial input
-            | _ -> printfn "⚠️ Unknown command: %s" data
-        
-        frameCount <- frameCount + 1
-        let elapsedTime = startTime.ElapsedMilliseconds
+                // FPS & Latency Reporting
+                frameCount <- frameCount + 1
+                let elapsedTime = startTime.ElapsedMilliseconds
+                if lastTime.ElapsedMilliseconds >= 1000 then
+                    printfn "⚡ FPS: %d | Latency: %dms" frameCount elapsedTime
+                    frameCount <- 0
+                    lastTime.Restart()
 
-        if lastTime.ElapsedMilliseconds >= 1000 then
-            printfn "FPS: %d | Latency: %dms" frameCount elapsedTime
-            frameCount <- 0
-            lastTime.Restart()
+                do! Async.Sleep(100)  // Allow other tasks to execute
 
-        do! mainLoop ()
+            with ex ->
+                printfn "❌ Error in main loop: %s" ex.Message
     }
 
+// 🎮 Main Application Entry Point
 [<EntryPoint>]
 let main argv =
-    match gameSelection() with
-    | Some _ -> 
-        printfn "Starting primary monitor capture..."
-        mainLoop () |> Async.StartAsTask |> ignore
-    | None -> printfn "No monitor selected."
-    0
+    printfn "🚀 Assistive Aim Guide is starting..."
+    showHelpMessage ()
+    let mutable continueRunning = true
 
-// Ensure Serial Port is properly closed on exit
-System.AppDomain.CurrentDomain.ProcessExit.Add(fun _ ->
-    if port.IsOpen then port.Close()
-    printfn "🔌 Serial Port Closed"
-)
+    while continueRunning do
+        match gameSelection() with
+        | Some game ->
+            printfn "🎯 Starting primary monitor capture for %s..." game
+            Async.StartAsTask(mainLoop cts.Token) |> Async.AwaitTask |> ignore
+            printfn "🔘 Press any key to exit or 'R' to restart..."
+            match Console.ReadKey(true).Key with
+            | ConsoleKey.R -> continueRunning <- true
+            | _ -> continueRunning <- false
+        | None -> 
+            printfn "❌ No game selected. Open a game and press any key to retry or 'E' to exit."
+            match Console.ReadKey(true).Key with
+            | ConsoleKey.E -> continueRunning <- false
+            | _ -> ()
+    
+    // Ensure proper cleanup before exiting
+    printfn "🔄 Shutting down..."
+    cts.Cancel() // Stop the main loop safely
+    if port <> null && port.IsOpen then port.Dispose()
+    0 // Exit Code
