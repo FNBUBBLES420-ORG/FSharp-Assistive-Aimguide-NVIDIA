@@ -106,9 +106,9 @@ dotnet --version
 ## 2️⃣ Install Project Dependencies
 Run the setup script:
 ```
-setup_dependencies.bat  # (Windows 11)
+install_dotnet.bat  # (Windows 11)
 ```
-- Or manually install the required packages:
+- Manually install the required packages below:
 
 ```
 dotnet add package Microsoft.ML.OnnxRuntime --version 1.20.1
