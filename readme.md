@@ -194,7 +194,7 @@ You can edit the config.json file to tweak settings such as:
 - Issue: Arduino Leonardo not recognized.
 - Fix: Ensure the correct COM port is set and the drivers are properly installed.
 ---
-
+https://github.com/KernFerm/FSharp-Assistive-Aimguide-NVIDIA/tree/main
 ### Note: This tool is Windows 11-only due to its reliance on DirectX and Windows-specific libraries.
 
 # LICENSE
@@ -205,6 +205,22 @@ You can edit the config.json file to tweak settings such as:
 ## 📧 Need help? Contact us on Discord or open an issue!
 
 [Invite Link](https://discord.fnbubbles420.org/invite)
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+---
+
 
 - Go to the `Assistive AimGuide channel` and `ping Bubbles The Dev`.
 - How to use custom models join the server and ask `Bubbles`.
