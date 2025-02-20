@@ -1,29 +1,53 @@
-# Security Policy
+# Security and Dependency Management
 
-## Supported Versions
+This document outlines the security considerations and dependency management guidelines for this project. Use the grids below to install the correct package versions for your target GPU hardware.
 
-Below are the versions currently supported with security updates:
+---
 
-| Package                               | Supported Version |
-|---------------------------------------|------------------|
-| **Microsoft.ML.OnnxRuntime**          | 1.20.1          |
-| **Microsoft.ML.OnnxRuntime.Gpu**      | 1.20.1          |
-| **Microsoft.ML.OnnxRuntime.DirectML** | 1.20.1          |
-| **TorchSharp**                        | 0.100.5         |
-| **MathNet.Numerics**                  | 5.0.0           |
-| **Emgu.CV**                           | 4.5.5           |
-| **WindowsInput**                      | 1.3.0           |
-| **ManagedCuda**                       | 11.7.0          |
-| **DirectML.NET**                      | 1.9.0           |
+## Dependency Integrity
 
-## Reporting a Vulnerability
+All dependencies are managed via the .NET package manager (`dotnet add package`). The versions listed in the tables have been verified for compatibility and security. Always use secure connections when installing packages, and verify package integrity using the publisher’s checksums or signatures.
 
-If you discover a security vulnerability, please follow the steps below:
+---
 
-1. **Submit an Issue:** Open a security issue in the repository and describe the vulnerability in detail.
-2. **Contact Maintainers:** Email the security team at `contact@fnbubbles420.org`
-3. **Expected Response Time:** We will acknowledge your report within **72 hours** and provide updates regularly.
-4. **Resolution Process:** If accepted, we will develop and release a fix in the next security update cycle. If declined, we will provide a detailed explanation.
+## NVIDIA GPU Deployment
 
-### Responsible Disclosure
-We encourage responsible disclosure and will work with researchers to validate, address, and disclose vulnerabilities in a manner that minimizes risk to users.
+For systems with NVIDIA GPUs using CUDA, install the following packages:
+
+| **Package**                           | **Command**                                                                                               | **Version**    |
+|---------------------------------------|-----------------------------------------------------------------------------------------------------------|----------------|
+| Microsoft.ML.OnnxRuntime              | `dotnet add package Microsoft.ML.OnnxRuntime --version 1.20.1`                                              | 1.20.1         |
+| Microsoft.ML.OnnxRuntime.Gpu          | `dotnet add package Microsoft.ML.OnnxRuntime.Gpu --version 1.20.1`                                          | 1.20.1         |
+| TorchSharp                            | `dotnet add package TorchSharp --version 0.101.0`                                                           | 0.101.0        |
+| MathNet.Numerics                      | `dotnet add package MathNet.Numerics --version 5.0.0`                                                       | 5.0.0          |
+| Emgu.CV                               | `dotnet add package Emgu.CV --version 4.6.0.5131`                                                           | 4.6.0.5131     |
+| ManagedCuda                           | `dotnet add package ManagedCuda --version 10.0.0`                                                           | 10.0.0         |
+| System.IO.Ports                       | `dotnet add package System.IO.Ports --version 7.0.0`                                                        | 7.0.0          |
+| InputSimulatorStandard                | `dotnet add package InputSimulatorStandard --version 1.0.0`                                                 | 1.0.0          |
+| RJCP.SerialPortStream                 | `dotnet add package RJCP.SerialPortStream --version 3.0.1`                                                  | 3.0.1          |
+| SharpDX                               | `dotnet add package SharpDX --version 4.2.0`                                                                | 4.2.0          |
+| SharpDX.Direct3D11                    | `dotnet add package SharpDX.Direct3D11 --version 4.2.0`                                                     | 4.2.0          |
+| SharpDX.DXGI                          | `dotnet add package SharpDX.DXGI --version 4.2.0`                                                           | 4.2.0          |
+| Newtonsoft.Json                       | `dotnet add package Newtonsoft.Json --version 13.0.3`                                                       | 13.0.3         |
+
+---
+
+## Additional Security Measures
+
+- **Environment Isolation:**  
+  Utilize containerization or virtual environments to isolate project dependencies from your host system.
+
+- **Regular Updates:**  
+  Monitor for security updates and vulnerability patches for all dependencies. Review release notes regularly to ensure that you apply necessary security fixes.
+
+- **Dependency Scanning:**  
+  Use tools such as [OWASP Dependency-Check](https://owasp.org/www-project-dependency-check/) to identify and remediate potential vulnerabilities in your project dependencies.
+
+- **Secure Configuration:**  
+  Make sure that configuration files (e.g., `config.json`, `.env`) do not contain sensitive data. Store secrets and sensitive configuration in secure vaults or environment variables.
+
+---
+
+By following these guidelines and installing the specified package versions, you help ensure that your project remains secure, stable, and compliant with our security standards. For further security best practices, refer to our internal security documentation or contact the security team.
+
+---
