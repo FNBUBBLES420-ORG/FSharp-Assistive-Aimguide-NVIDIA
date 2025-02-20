@@ -197,21 +197,7 @@ You can edit the config.json file to tweak settings such as:
 
 ### Note: This tool is Windows 11-only due to its reliance on DirectX and Windows-specific libraries.
 
-# LICENSE
-### ***This project is proprietary and all rights are reserved by the author.***
-### ***Unauthorized copying, distribution, or modification of this project is strictly prohibited.***
-### ***Unless You have written permission from the Developer or the FNBUBBLES420 ORG.***
-
-## 📧 Need help? Contact us on Discord or open an issue!
-
-[Invite Link](https://discord.fnbubbles420.org/invite)
-- Go to the `Assistive AimGuide channel` and `ping Bubbles The Dev`.
-- How to use custom models join the server and ask `Bubbles`.
-
-## 🚀 Happy Gaming! 🎮
-
-
-
+---
 ---
 # 🚀 NVIDIA CUDA Installation Guide
 
@@ -336,3 +322,19 @@ set PATH=C:\tools\cuda\bin;%PATH%
 ```
 This should properly set up CUDA 11.8 to be used for your projects via `cmd.exe`.
 ---
+
+
+---
+
+# LICENSE
+### ***This project is proprietary and all rights are reserved by the author.***
+### ***Unauthorized copying, distribution, or modification of this project is strictly prohibited.***
+### ***Unless You have written permission from the Developer or the FNBUBBLES420 ORG.***
+
+## 📧 Need help? Contact us on Discord or open an issue!
+
+[Invite Link](https://discord.fnbubbles420.org/invite)
+- Go to the `Assistive AimGuide channel` and `ping Bubbles The Dev`.
+- How to use custom models join the server and ask `Bubbles`.
+
+## 🚀 Happy Gaming! 🎮
