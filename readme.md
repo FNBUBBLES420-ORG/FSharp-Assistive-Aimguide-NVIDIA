@@ -205,5 +205,6 @@ This project is proprietary. All rights are reserved by the author. Unauthorized
 [Invite Link](https://discord.fnbubbles420.org/invite)
 
 - Go to the `Assistive AimGuide channel` and `ping Bubbles The Dev`.
+- How to use custom models join the server and ask `Bubbles`.
 
 ## 🚀 Happy Gaming! 🎮
