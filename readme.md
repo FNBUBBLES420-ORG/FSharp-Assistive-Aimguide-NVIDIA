@@ -113,7 +113,7 @@ install_dotnet.bat  # (Windows 11)
 ```
 dotnet add package Microsoft.ML.OnnxRuntime --version 1.20.1
 dotnet add package Microsoft.ML.OnnxRuntime.Gpu --version 1.20.1
-dotnet add package TorchSharp --version 0.101.0
+dotnet add package TorchSharp --version 0.105.0
 dotnet add package MathNet.Numerics --version 5.0.0
 dotnet add package Emgu.CV --version 4.6.0.5131
 dotnet add package ManagedCuda --version 10.0.0
