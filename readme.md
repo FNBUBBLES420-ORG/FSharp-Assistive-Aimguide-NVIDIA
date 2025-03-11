@@ -125,7 +125,7 @@ dotnet add package SharpDX.Direct3D11 --version 4.2.0
 dotnet add package SharpDX.DXGI --version 4.2.0
 dotnet add package Newtonsoft.Json --version 13.0.3
 ```
-- If you have issues installing the dotnet packages 
+# If you have issues installing the dotnet packages 
 
 To resolve this, try the following steps:
 
