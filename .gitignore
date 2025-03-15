@@ -4,6 +4,7 @@
 bin/
 obj/
 *.exe
+autosetup.exe
 *.dll
 *.pdb
 *.nuget.props
