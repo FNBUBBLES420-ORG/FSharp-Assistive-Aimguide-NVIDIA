@@ -347,6 +347,18 @@ set PATH=C:\tools\cuda\bin;%PATH%
 This should properly set up CUDA 11.8 to be used for your projects via `cmd.exe`.
 ---
 
+## 🛠️ Tested Environment
+
+The project has been successfully tested on the following setup:
+
+- **Processor**: AMD Ryzen 9 7900X 12-Core Processor @ 4.70 GHz
+- **GPU**: DUEL GPU: "NVIDIA GeForce RTX 4060 Ti" "AMD Radeon"
+- **Operating System**: Windows 11
+- **Python Version**: 3.11.9
+
+### Works On
+- **Nvidia GPU**
+- **AMD GPU**
 
 ---
 
@@ -361,4 +373,6 @@ This should properly set up CUDA 11.8 to be used for your projects via `cmd.exe`
 - Go to the `Assistive AimGuide channel` and `ping Bubbles The Dev`.
 - How to use custom models join the server and ask `Bubbles`.
 
+---
 ## 🚀 Happy Gaming! 🎮
+---
