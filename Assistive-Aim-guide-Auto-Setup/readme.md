@@ -93,20 +93,6 @@ python -m pip install torch torchvision torchaudio torch-directml numpy opencv-p
 
 ---
 
-## 🔸 CPU-Only Users 💻
-No additional setup is needed. The script will install:
-```bash
-python -m pip install torch torchvision torchaudio numpy opencv-python pyautogui pygetwindow pandas pywin32 pyyaml tqdm matplotlib seaborn requests ipython psutil dxcam onnxruntime serial bettercam pyarmor ultralytics onnx
-```
-
----
-
-## 🛠️ Final Setup (For All Users)
-The script will install **all required Python packages**:
-```bash
-python -m pip install numpy opencv-python comtypes pandas bettercam psutil colorama ultralytics PyAutoGUI PyGetWindow pywin32 pyyaml tqdm matplotlib seaborn requests ipython dxcam onnx onnxruntime onnx-simplifier pyarmor dill serial
-```
-
 ---
 
 ## 🎯 Completion
