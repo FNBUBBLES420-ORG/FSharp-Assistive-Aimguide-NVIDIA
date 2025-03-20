@@ -221,6 +221,9 @@ You can edit the config.json file to tweak settings such as:
 
 ### Note: This tool is Windows 11-only due to its reliance on DirectX and Windows-specific libraries.
 
+# GOT ISSUES ??
+## [GOT ISSUES CLICK HERE](https://github.com/FNBUBBLES420-ORG/FSharp-Assistive-Aimguide-NVIDIA/blob/main/GOT-ISSUES%3F.MD)
+
 ---
 ---
 # 🚀 NVIDIA CUDA Installation Guide
